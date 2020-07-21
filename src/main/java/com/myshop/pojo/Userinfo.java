@@ -58,5 +58,17 @@ public class Userinfo {
         this.realname = realname;
     }
 
+    public Userinfo(String username, String password, String realname) {
+
+        this.username = username;
+        this.password = password;
+        this.realname = realname;
+    }
+
+    public Userinfo(String username, String realname) {
+        this.username = username;
+        this.realname = realname;
+    }
+
 
 }
