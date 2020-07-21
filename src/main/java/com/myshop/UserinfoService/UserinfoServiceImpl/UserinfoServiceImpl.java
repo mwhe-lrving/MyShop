@@ -44,4 +44,8 @@ public class UserinfoServiceImpl implements UserinfoService {
     public Userinfo register(Userinfo user) {
         return null;
     }
+
+    public int logout(Userinfo user) {
+        return 0;
+    }
 }
