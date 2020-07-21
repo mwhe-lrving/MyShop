@@ -18,7 +18,6 @@ public class UserinfoServiceImpl implements UserinfoService {
     public UserinfoServiceImpl() {
         String resource = "mybatis/Configuration.xml";
         Reader reader;
-
         try {
             reader = Resources.getResourceAsReader(resource);
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
