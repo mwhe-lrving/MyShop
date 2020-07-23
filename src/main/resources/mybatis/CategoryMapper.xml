@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.CategoryMapper">
+
+    <resultMap id="categoryResultMap" type="Category">
+        <id column="id" property="id"></id>
+        <collection property="goodslist" ofType="Goods" column="id"
+                    select="com.myshop.mapper.GoodsMapper.selectByCategory"></collection>
+    </resultMap>
+    <insert id="insertCategory" parameterType="Category">
+      insert into category(name,goodsnum) values (#{name},#{goodsnum})
+    </insert>
+
+
+    <update id="updateCategory" parameterType="Category">
+      update category set name=#{name},goodsnum=#{goodsnum} where id=#{id}
+    </update>
+
+
+    <delete id="deleteById" parameterType="integer">
+        delete from category where id=#{_parameter}
+    </delete>
+
+
+    <select id="selectById" parameterType="integer" resultType="Category">
+        select * from category where id=#{_parameter}
+    </select>
+    <select id="selectCategoryGoodsById" parameterType="integer" resultMap="categoryResultMap">
+      select * from category where id=#{_parameter}
+    </select>
+
+    <select id="selectByName" parameterType="string" resultType="Category">
+        select * from category where name=#{name}
+    </select>
+
+
+    <select id="selectAll" resultType="Category">
+        select * from category order by id desc
+    </select>
+</mapper>
