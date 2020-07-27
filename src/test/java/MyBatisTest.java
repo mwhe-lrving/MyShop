@@ -1,5 +1,5 @@
-import com.myshop.UserinfoService.UserinfoService;
-import com.myshop.UserinfoService.UserinfoServiceImpl.UserinfoServiceImpl;
+import com.myshop.service.UserinfoService;
+import com.myshop.service.Impl.UserinfoServiceImpl;
 import com.myshop.mapper.UserinfoMapper;
 import com.myshop.pojo.Userinfo;
 import org.apache.ibatis.io.Resources;
@@ -181,4 +181,7 @@ public class MyBatisTest {
         }
 
     }
+
+
+
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+      ">
+<context:component-scan base-package="com.myshop"></context:component-scan>
+<!--    <bean id="category" class="com.myshop.pojo.Category">-->
+<!--        <property name="id" value="1"></property>-->
+<!--        <property name="name" value="水果"></property>-->
+<!--        <property name="goodsnum" value="100"></property>-->
+<!--    </bean>-->
+
+<!--    <bean id="goods" class="com.myshop.pojo.GoodsComplex">-->
+<!--        <property name="id" value="1"></property>-->
+<!--        <property name="name" value="香蕉"></property>-->
+<!--        <property name="price" value="100"></property>-->
+<!--        <property name="category" ref="category"></property>-->
+<!--    </bean>-->
+
+
+</beans>

@@ -5,21 +5,28 @@
     <typeAliases>
         <package name="com.myshop.pojo"/>
     </typeAliases>
-
+<plugins>
+    <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        <property name="reasonable" value="true"/>
+    </plugin>
+</plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <!-- 配置数据库连接信息 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/MyShop?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/MyShop?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
                 <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="password" value="123456"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
         <mapper resource="mybatis/UserinfoMapper.xml"/>
+        <mapper resource="mybatis/CategoryMapper.xml"/>
+        <mapper resource="mybatis/GoodsMapper.xml"/>
+        <mapper resource="mybatis/AdminMapper.xml"/>
     </mappers>
 </configuration>

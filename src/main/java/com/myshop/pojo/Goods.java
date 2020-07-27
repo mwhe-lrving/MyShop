@@ -1,19 +1,33 @@
 package com.myshop.pojo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
+@Component
 public class Goods {
-    private Integer id;
-    private String name;
+    private Integer id =1;
+
+    private String name="大香蕉";
+
     private Integer price;
+
     private Integer num;
+
+
     private String image;
+
     private Date createDate;
+
     private Date updateDate;
-    private Integer categoryid;
-    private Category category;
 
-    public Goods(Integer id, String name, Integer price, Integer num, String image, Date createDate, Date updateDate, Integer categoryid) {
+    private Integer categoryId;
+
+    public Goods() {
+    }
+
+    public Goods(Integer id, String name, Integer price, Integer num, String image, Date createDate, Date updateDate, Integer categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -21,41 +35,18 @@ public class Goods {
         this.image = image;
         this.createDate = createDate;
         this.updateDate = updateDate;
-        this.categoryid = categoryid;
-
+        this.categoryId = categoryId;
     }
 
-    public Goods(Integer id, String name, Integer price, Integer num, Date createDate, Date updateDate, Integer categoryid) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.num = num;
+    public Goods(String name, Integer price, Integer num, String image, Date createDate, Date updateDate, Integer categoryId) {
 
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.categoryid = categoryid;
-
-    }
-    public Goods(Integer id, String name, Integer price, Integer num, String image, Date createDate, Date updateDate, Integer categoryid, Category category) {
-        this.id = id;
         this.name = name;
         this.price = price;
         this.num = num;
         this.image = image;
         this.createDate = createDate;
         this.updateDate = updateDate;
-        this.categoryid = categoryid;
-        this.category = category;
-    }
-
-    public Goods(String name, Integer price, Integer num, Date createDate, Date updateDate) {
-
-        this.name = name;
-        this.price = price;
-        this.num = num;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-
+        this.categoryId = categoryId;
     }
 
     @Override
@@ -68,8 +59,7 @@ public class Goods {
                 ", image='" + image + '\'' +
                 ", createDate=" + createDate +
                 ", updateDate=" + updateDate +
-                ", categoryid=" + categoryid +
-                ", category=" + category +
+                ", categoryId=" + categoryId +
                 '}';
     }
 
@@ -86,7 +76,7 @@ public class Goods {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getPrice() {
@@ -110,40 +100,30 @@ public class Goods {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
-    public Date getCreateData() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateData(Date createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdataData() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdataData(Date updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
-    public Integer getCategoryid() {
-        return categoryid;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryid(Integer categoryid) {
-        this.categoryid = categoryid;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-
 }

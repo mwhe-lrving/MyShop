@@ -1,14 +1,16 @@
 package com.myshop.pojo;
 
-public class Category {
-    private Integer id;
-    private String name;
-    private Integer goodsnum;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-    public Category(String name, Integer goodsnum) {
-        this.name = name;
-        this.goodsnum = goodsnum;
-    }
+@Component
+public class Category {
+
+    private Integer id = 1;
+    @Value("新鲜水果")
+    private String name ;
+
+    private Integer goodsnum = 999;
 
     public Category(Integer id, String name, Integer goodsnum) {
         this.id = id;
@@ -41,7 +43,7 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Integer getGoodsnum() {

@@ -26,7 +26,7 @@
         values(#{username},#{password},#{realname});
     </insert>
 
-    <update id="" parameterType="Userinfo">
+    <update id="updateById" parameterType="Userinfo">
         update userinfo set
         username=#{username},
         password=#{password},
