@@ -1,5 +1,8 @@
 package com.myshop.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Userinfo {
     private Integer userid;
     private String username;

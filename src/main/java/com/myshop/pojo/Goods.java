@@ -7,9 +7,9 @@ import java.util.Date;
 
 @Component
 public class Goods {
-    private Integer id =1;
+    private Integer id;
 
-    private String name="大香蕉";
+    private String name;
 
     private Integer price;
 

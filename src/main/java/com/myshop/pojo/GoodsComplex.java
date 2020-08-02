@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 @Component
 public class GoodsComplex extends Goods {
-    @Autowired
+
     private Category category;
 
     public Category getCategory() {
