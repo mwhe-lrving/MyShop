@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class Category {
 
-    private Integer id = 1;
-    @Value("新鲜水果")
+    private Integer id;
+
     private String name ;
 
-    private Integer goodsnum = 999;
+    private Integer goodsnum;
 
     public Category(Integer id, String name, Integer goodsnum) {
         this.id = id;
