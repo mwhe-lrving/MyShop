@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.KillGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.myshop.pojo.KillGoods">
+    <id column="killid" jdbcType="INTEGER" property="killid" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="stockcount" jdbcType="INTEGER" property="stockcount" />
+    <result column="startdate" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="enddate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="killprice" jdbcType="DECIMAL" property="killprice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    killid, goodsid, stockcount, startdate, enddate, killprice
+  </sql>
+  <select id="selectByExample" parameterType="com.myshop.pojo.KillGoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from killgoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
+
+
+
+  <select id="selectAllKillGoods" resultType="KillGoods">
+
+SELECT goods.id ,goods.name,goods.price,killgoods.killid,killgoods.killprice,killgoods.stockcount ,startdate,enddate FROM `killgoods` left JOIN goods on killgoods.goodsid=goods.id
+
+
+
+  </select>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultType="KillGoods">
+ SELECT goods.id ,killgoods.goodsid,goods.name,goods.price,killgoods.killid,killgoods.killprice,killgoods.stockcount ,startdate,enddate FROM `killgoods` left JOIN goods on killgoods.goodsid=goods.id
+ where killid=#{_parameter}
+
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from killgoods
+    where killid = #{killid,jdbcType=INTEGER}
+  </select>
+
+
+
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from killgoods
+    where killid = #{killid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myshop.pojo.KillGoodsExample">
+    delete from killgoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myshop.pojo.KillGoods">
+    <selectKey keyProperty="killid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into killgoods (goodsid, stockcount, startdate, 
+      enddate, killprice)
+    values (#{goodsid,jdbcType=INTEGER}, #{stockcount,jdbcType=INTEGER}, #{startdate,jdbcType=TIMESTAMP}, 
+      #{enddate,jdbcType=TIMESTAMP}, #{killprice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myshop.pojo.KillGoods">
+    <selectKey keyProperty="killid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into killgoods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="stockcount != null">
+        stockcount,
+      </if>
+      <if test="startdate != null">
+        startdate,
+      </if>
+      <if test="enddate != null">
+        enddate,
+      </if>
+      <if test="killprice != null">
+        killprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="stockcount != null">
+        #{stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="killprice != null">
+        #{killprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myshop.pojo.KillGoodsExample" resultType="java.lang.Long">
+    select count(*) from killgoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update killgoods
+    <set>
+      <if test="record.killid != null">
+        killid = #{record.killid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null">
+        goodsid = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stockcount != null">
+        stockcount = #{record.stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.startdate != null">
+        startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enddate != null">
+        enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.killprice != null">
+        killprice = #{record.killprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update killgoods
+    set killid = #{record.killid,jdbcType=INTEGER},
+      goodsid = #{record.goodsid,jdbcType=INTEGER},
+      stockcount = #{record.stockcount,jdbcType=INTEGER},
+      startdate = #{record.startdate,jdbcType=TIMESTAMP},
+      enddate = #{record.enddate,jdbcType=TIMESTAMP},
+      killprice = #{record.killprice,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myshop.pojo.KillGoods">
+    update killgoods
+    <set>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="stockcount != null">
+        stockcount = #{stockcount,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null">
+        startdate = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null">
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="killprice != null">
+        killprice = #{killprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where killid = #{killid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myshop.pojo.KillGoods">
+    update killgoods
+    set goodsid = #{goodsid,jdbcType=INTEGER},
+      stockcount = #{stockcount,jdbcType=INTEGER},
+      startdate = #{startdate,jdbcType=TIMESTAMP},
+      enddate = #{enddate,jdbcType=TIMESTAMP},
+      killprice = #{killprice,jdbcType=DECIMAL}
+    where killid = #{killid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.myshop.pojo.OrderInfo">
+    <id column="orderid" jdbcType="INTEGER" property="orderid" />
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="goodsid" jdbcType="INTEGER" property="goodsid" />
+    <result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
+    <result column="goodscount" jdbcType="VARCHAR" property="goodscount" />
+    <result column="goodsprice" jdbcType="DECIMAL" property="goodsprice" />
+    <result column="orderstatus" jdbcType="VARCHAR" property="orderstatus" />
+    <result column="createdate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="paydate" jdbcType="TIMESTAMP" property="paydate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    orderid, userid, goodsid, goodsname, goodscount, goodsprice, orderstatus, createdate, 
+    paydate
+  </sql>
+  <select id="selectByExample" parameterType="com.myshop.pojo.OrderInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderinfo
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderinfo
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myshop.pojo.OrderInfoExample">
+    delete from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.myshop.pojo.OrderInfo">
+    <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into orderinfo (userid, goodsid, goodsname, 
+      goodscount, goodsprice, orderstatus, 
+      createdate, paydate)
+    values (#{userid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, 
+      #{goodscount,jdbcType=VARCHAR}, #{goodsprice,jdbcType=DECIMAL}, #{orderstatus,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{paydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.myshop.pojo.OrderInfo">
+    <selectKey keyProperty="orderid" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="goodsid != null">
+        goodsid,
+      </if>
+      <if test="goodsname != null">
+        goodsname,
+      </if>
+      <if test="goodscount != null">
+        goodscount,
+      </if>
+      <if test="goodsprice != null">
+        goodsprice,
+      </if>
+      <if test="orderstatus != null">
+        orderstatus,
+      </if>
+      <if test="createdate != null">
+        createdate,
+      </if>
+      <if test="paydate != null">
+        paydate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscount != null">
+        #{goodscount,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderstatus != null">
+        #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paydate != null">
+        #{paydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.myshop.pojo.OrderInfoExample" resultType="java.lang.Long">
+    select count(*) from orderinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update orderinfo
+    <set>
+      <if test="record.orderid != null">
+        orderid = #{record.orderid,jdbcType=INTEGER},
+      </if>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsid != null">
+        goodsid = #{record.goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsname != null">
+        goodsname = #{record.goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodscount != null">
+        goodscount = #{record.goodscount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsprice != null">
+        goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderstatus != null">
+        orderstatus = #{record.orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null">
+        createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paydate != null">
+        paydate = #{record.paydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update orderinfo
+    set orderid = #{record.orderid,jdbcType=INTEGER},
+      userid = #{record.userid,jdbcType=INTEGER},
+      goodsid = #{record.goodsid,jdbcType=INTEGER},
+      goodsname = #{record.goodsname,jdbcType=VARCHAR},
+      goodscount = #{record.goodscount,jdbcType=VARCHAR},
+      goodsprice = #{record.goodsprice,jdbcType=DECIMAL},
+      orderstatus = #{record.orderstatus,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=TIMESTAMP},
+      paydate = #{record.paydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.myshop.pojo.OrderInfo">
+    update orderinfo
+    <set>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsid != null">
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null">
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscount != null">
+        goodscount = #{goodscount,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsprice != null">
+        goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="orderstatus != null">
+        orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paydate != null">
+        paydate = #{paydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.myshop.pojo.OrderInfo">
+    update orderinfo
+    set userid = #{userid,jdbcType=INTEGER},
+      goodsid = #{goodsid,jdbcType=INTEGER},
+      goodsname = #{goodsname,jdbcType=VARCHAR},
+      goodscount = #{goodscount,jdbcType=VARCHAR},
+      goodsprice = #{goodsprice,jdbcType=DECIMAL},
+      orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      paydate = #{paydate,jdbcType=TIMESTAMP}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>
