@@ -61,6 +61,7 @@
             <value>
                 /login = anon
                 /admin/** = authc
+                /killgoods/** = authc
             </value>
         </property>
     </bean>
