@@ -20,8 +20,7 @@ import java.io.IOException;
 public class UserinfoController {
     @Autowired
     private UserinfoService service;
-    @Autowired
-    Userinfo userinfo;
+
 
     //    @RequestMapping("dologin")
 //    public String doLogin(HttpServletRequest request, HttpServletResponse response, Userinfo user) {
@@ -44,8 +43,15 @@ public class UserinfoController {
 //
 //        return null;
 //    }
+
+
+
+
+
+
 //使用Shiro编写认证操作
     @RequestMapping("/dologin")
+
     public String login(String username, String password, Model model) {
         //获取Subject
         Subject subject = SecurityUtils.getSubject();
@@ -56,7 +62,6 @@ public class UserinfoController {
             subject.login(token);//会去UserRealm执行认证逻辑
             //登陆成功
             System.out.println("登陆成功");
-            userinfo.setUsername(username);
             return "redirect:/loginsuccess";
         } catch (UnknownAccountException e) {
             model.addAttribute("msg", "用户名不存在");
@@ -126,6 +131,9 @@ public class UserinfoController {
 
     @RequestMapping("/top")
     public String top(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        Userinfo userinfo = (Userinfo) subject.getPrincipal();
+        System.out.println(userinfo + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         model.addAttribute("msg", userinfo.getUsername());
         userinfo.setUsername("");
         return "top";
