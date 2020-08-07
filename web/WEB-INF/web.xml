@@ -80,9 +80,6 @@
     </filter-mapping>
 
 
-
-
-
     <servlet-mapping>
         <servlet-name>app</servlet-name>
         <url-pattern>/</url-pattern>
@@ -92,17 +89,6 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
-
-
-
-
-
-
-
-
-
 
 
 </web-app>
